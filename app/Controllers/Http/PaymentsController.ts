@@ -20,9 +20,9 @@ export default class PaymentsController {
 
       items: [
         {
-          name: 'Produto Teste 3',
+          name: 'Produto Teste 4 hook',
           value: 1000,
-          amount: 2,
+          amount: 1,
         },
       ],
       // shippings: [
@@ -31,6 +31,10 @@ export default class PaymentsController {
       //     value: 100,
       //   },
       // ],
+      metadata: {
+        custom_id: '0987',
+        notification_url: 'http://api.webhookinbox.com/i/WeyDutU6/in/',
+      },
     }
 
     const gerencianet = Gerencianet(options)
@@ -91,7 +95,7 @@ export default class PaymentsController {
     options['validateMtls'] = true
 
     const body = {
-      webhookUrl: 'https://pagamento.goatspace.co/webhook',
+      webhookUrl: 'https://mtls-h.pix.ae/api.webhookinbox.com/i/WeyDutU6/in/',
     }
 
     const gerencianet = Gerencianet(options)
@@ -112,5 +116,38 @@ export default class PaymentsController {
     console.log(data)
 
     return data
+  }
+
+  public async getNotification({ params }: HttpContextContract) {
+    const gerencianet = Gerencianet(options)
+
+    console.log(params.token)
+
+    const pagamento = await gerencianet.getNotification(params.token)
+
+    return pagamento
+  }
+
+  public async getWebhookpix({ params }: HttpContextContract) {
+    const gerencianet = Gerencianet(options)
+
+    console.log(params.chave)
+
+    const pagamento = await gerencianet.pixDetailWebhook(params.chave)
+
+    return pagamento
+  }
+
+  public async listWebhook({}: HttpContextContract) {
+    const gerencianet = Gerencianet(options)
+
+    const params = {
+      inicio: '2022-01-22T16:01:35Z',
+      fim: '2022-06-01T20:10:00Z',
+    }
+
+    const pagamento = await gerencianet.pixListWebhook(params)
+
+    return pagamento
   }
 }

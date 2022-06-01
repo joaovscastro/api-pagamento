@@ -32,6 +32,12 @@ Route.post('/boleto', 'PaymentsController.boleto')
 
 Route.post('/pix', 'PaymentsController.pix')
 
-Route.post('/configurar/:chave', 'configurar.pix')
+Route.post('/configurar/:chave', 'PaymentsController.configurar')
 
-Route.post('/webhook/pix', 'webhook.pix')
+Route.post('/webhook/pix', 'PaymentsController.webhook')
+
+Route.get('/notificacao/:token', 'PaymentsController.getNotification')
+
+Route.get('/webhook/:chave', 'PaymentsController.getWebhookpix')
+
+Route.get('/webhooks', 'PaymentsController.listWebhook')
