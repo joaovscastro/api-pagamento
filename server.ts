@@ -12,8 +12,25 @@
 
 import 'reflect-metadata'
 import sourceMapSupport from 'source-map-support'
-import { Ignitor } from '@adonisjs/core/build/standalone'
+import { join } from 'path'
+import { readFileSync } from 'fs'
+import { createServer } from 'https'
+import { Ignitor } from '@adonisjs/core/build/src/Ignitor'
 
 sourceMapSupport.install({ handleUncaughtExceptions: false })
 
-new Ignitor(__dirname).httpServer().start()
+const httpsOptions: any = {
+  cert: readFileSync(join(__dirname + '/sslCert/certificate.crt')), // Certificado fullchain do dominio
+  key: readFileSync(join(__dirname + '/sslCert/private.key')), // Chave privada do domínio
+  ca: readFileSync(join(__dirname + '/sslCert/chain-pix-sandbox.cer')), // Certificado público da Gerencianet
+  minVersion: 'TLSv1.2',
+  requestCert: true,
+  rejectUnauthorized: false, //Mantenha como false para que os demais endpoints da API não rejeitem requisições sem MTLS
+}
+
+new Ignitor(__dirname)
+  .httpServer()
+  .start((handle) => {
+    return createServer(httpsOptions, handle)
+  })
+  .catch(console.error)
