@@ -24,6 +24,5 @@
       }
     ]
   },
-  "testProviders": ["@japa/preset-adonis/TestsProvider"],
-  "metaFiles": ["sslCert/*"]
+  "testProviders": ["@japa/preset-adonis/TestsProvider"]
 }
