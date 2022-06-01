@@ -133,7 +133,7 @@ export default class PixController {
   }
 
   // Teste
-  public async teste({ response }: HttpContextContract) {
+  public async teste({}: HttpContextContract) {
     const body = {
       items: [
         {
@@ -169,7 +169,7 @@ export default class PixController {
   }
 
   // Teste
-  public async testedois({ response }: HttpContextContract) {
+  public async testedois({}: HttpContextContract) {
     const certificate = fs.readFileSync('./certificado.p12')
     const data = JSON.stringify({
       items: [

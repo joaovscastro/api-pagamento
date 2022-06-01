@@ -106,7 +106,7 @@ export default class PaymentsController {
     }
   }
 
-  public async webhook({ request, response, params }: HttpContextContract) {
+  public async webhook({ request }: HttpContextContract) {
     const data = request.all()
 
     console.log(data)
