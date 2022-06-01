@@ -1,4 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Logger from '@ioc:Adonis/Core/Logger'
 import Gerencianet from 'gn-api-sdk-typescript'
 import options from '../../../config'
 
@@ -95,7 +96,7 @@ export default class PaymentsController {
     options['validateMtls'] = true
 
     const body = {
-      webhookUrl: 'https://mtls-h.pix.ae/api.webhookinbox.com/i/WeyDutU6/in/',
+      webhookUrl: 'https://pagamento.goatspace.co/webhook',
     }
 
     const gerencianet = Gerencianet(options)
@@ -112,6 +113,18 @@ export default class PaymentsController {
 
   public async webhook({ request }: HttpContextContract) {
     const data = request.all()
+
+    Logger.info('A info message')
+
+    console.log(data)
+
+    return data
+  }
+
+  public async webhookpix({ request }: HttpContextContract) {
+    const data = request.all()
+
+    Logger.info('A info message')
 
     console.log(data)
 

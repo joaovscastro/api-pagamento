@@ -34,7 +34,9 @@ Route.post('/pix', 'PaymentsController.pix')
 
 Route.post('/configurar/:chave', 'PaymentsController.configurar')
 
-Route.post('/webhook/pix', 'PaymentsController.webhook')
+Route.post('/webhook', 'PaymentsController.webhook')
+
+Route.post('/webhook/pix', 'PaymentsController.webhookpix')
 
 Route.get('/notificacao/:token', 'PaymentsController.getNotification')
 
